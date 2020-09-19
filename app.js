@@ -121,10 +121,8 @@ app.get('/api/getSubmitedDevices',(req,res)=>{
     })
 })
 
-
 app.post('/api/updateDevice',(req,res)=>{
-   
-        const device = req.body.device;
+    const device = req.body.device;
         let findDevice=file["devices"].find(devices => devices.id === device.id )
         let index=file["devices"].indexOf(findDevice);
 
@@ -133,14 +131,60 @@ app.post('/api/updateDevice',(req,res)=>{
     res.sendStatus(200)
 })
 
+app.post('/api/updateAllotedDevice',(req,res)=>{
+   
+        const device = req.body.device;
+        let findDevice=file["allotedDevices"].find(devices => devices.id === device.id )
+        let index=file["allotedDevices"].indexOf(findDevice);
+
+        file["allotedDevices"].splice(index,1,device);
+    jsonWriter(JSON.stringify(file));
+    res.sendStatus(200)
+})
+
+app.post('/api/updateSubmitDevice',(req,res)=>{
+   
+    const device = req.body.device;
+    let findDevice=file["submitedDevices"].find(devices => devices.id === device.id )
+    let index=file["submitedDevices"].indexOf(findDevice);
+
+    file["submitedDevices"].splice(index,1,device);
+jsonWriter(JSON.stringify(file));
+res.sendStatus(200)
+})
+
 app.post('/api/deleteDevice',(req,res)=>{
    
     const id = req.body.id;
       let findDevice=file["devices"].find(devices => devices.id === id )
-      console.log(findDevice)
         let index=file["devices"].indexOf(findDevice);
 
         file["devices"].splice(index,1);
+    jsonWriter(JSON.stringify(file));
+    res.sendStatus(200)
+})
+
+
+app.post('/api/delAllotedDevice',(req,res)=>{
+   
+    const id = req.body.id;
+      let findDevice=file["allotedDevices"].find(devices => devices.id === id )
+
+        let index=file["allotedDevices"].indexOf(findDevice);
+
+        file["allotedDevices"].splice(index,1);
+    jsonWriter(JSON.stringify(file));
+    res.sendStatus(200)
+})
+
+app.post('/api/delsubmittedDevice',(req,res)=>{
+   
+    const id = req.body.id;
+      let findDevice=file["submitedDevices"].find(devices => devices.id === id )
+
+        let index=file["submitedDevices"].indexOf(findDevice);
+
+        file["submitedDevices"].splice(index,1);
     jsonWriter(JSON.stringify(file));
     res.sendStatus(200)
 })

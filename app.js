@@ -8,9 +8,6 @@ const fs = require('fs')
 var file = require('./database/db.json')
 app.use(express.static(path.join(__dirname, './build')));
 
-const cors = require("cors");
-
-app.use(cors());
 
 
 function jsonReader( cb) {
@@ -188,4 +185,4 @@ app.post('/api/delsubmittedDevice',(req,res)=>{
     jsonWriter(JSON.stringify(file));
     res.sendStatus(200)
 })
-app.listen(3080);   
+app.listen(process.env.port);   
